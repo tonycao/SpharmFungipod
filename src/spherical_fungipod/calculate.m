@@ -41,11 +41,12 @@ allSphereRegularCoefficients = [];
 %each row consists of the rotation invariant coefficients of a given radius level
 allSphereRotationInvariantCoefficients = [];
 
-max_degree = 2; % i.e. "l" takes values between 0 and 6 (both included).
+max_degree = 4; % i.e. "l" takes values between 0 and 6 (both included).
 %max_degree = 4
 
 basis_count = max_degree+1+(max_degree*(max_degree+1));
 
+%normalize the coordinates to a unit sphere
 len = size(locX,2);
 for ind_rad = 1:no_of_radii
     for ind_node = 1:len

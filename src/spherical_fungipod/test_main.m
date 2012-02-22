@@ -97,18 +97,18 @@ folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/3d'];
 %}
 
 %%{
-folder = [folder ; 'spharmFungipod/artifical_images/f1a'];
-folder = [folder ; 'spharmFungipod/artifical_images/f1b'];
-folder = [folder ; 'spharmFungipod/artifical_images/f1c'];
-folder = [folder ; 'spharmFungipod/artifical_images/f1d'];
-folder = [folder ; 'spharmFungipod/artifical_images/f2a'];
-folder = [folder ; 'spharmFungipod/artifical_images/f2b'];
-folder = [folder ; 'spharmFungipod/artifical_images/f2c'];
-folder = [folder ; 'spharmFungipod/artifical_images/f2d'];
-folder = [folder ; 'spharmFungipod/artifical_images/f3a'];
-folder = [folder ; 'spharmFungipod/artifical_images/f3b'];
-folder = [folder ; 'spharmFungipod/artifical_images/f3c'];
-folder = [folder ; 'spharmFungipod/artifical_images/f3d'];
+folder = [folder ; '../data/artifical_images/f1a'];
+folder = [folder ; '../data/artifical_images/f1b'];
+folder = [folder ; '../data/artifical_images/f1c'];
+folder = [folder ; '../data/artifical_images/f1d'];
+folder = [folder ; '../data/artifical_images/f2a'];
+folder = [folder ; '../data/artifical_images/f2b'];
+folder = [folder ; '../data/artifical_images/f2c'];
+folder = [folder ; '../data/artifical_images/f2d'];
+folder = [folder ; '../data/artifical_images/f3a'];
+folder = [folder ; '../data/artifical_images/f3b'];
+folder = [folder ; '../data/artifical_images/f3c'];
+folder = [folder ; '../data/artifical_images/f3d'];
 %%}
 
 %{
@@ -138,8 +138,8 @@ radius_of_yeast = 10*voxeldim;
 %%{
 voxeldim = 0.414;
 spacing = [0.414 0.414 0.414];
-no_of_radii = 10;
-radius_of_yeast = 90*voxeldim;
+no_of_radii = 5;
+radius_of_yeast = 10*voxeldim;
 %%}
 
 for q = 1:size(folder,1)
@@ -199,3 +199,23 @@ figure, imagesc(all_dist), colorbar, colormap hot, title ''
 
 %%
 %all_dist= dist2(temp_fung,temp_fung);
+
+trainingSet = conf_all;
+grouplabel = center(:,5);
+
+% knn test
+sizeTraining = size(trainingSet,1);
+for i=1:sizeTraining
+   test = trainingSet(i,:);
+   training = trainingSet;
+   training(i,:) = [];
+   group = grouplabel;
+   group(i,:) = [];
+   
+   label = knnclassify(test, training, group);
+   
+   display([num2str(i) 'th test case labeled as ' num2str(label) '']);
+end
+
+
+

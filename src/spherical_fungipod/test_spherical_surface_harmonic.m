@@ -1,5 +1,5 @@
 % Define constants.
-degree = 6;
+degree = 3;
 order = 1;
 
 % Create the grid
@@ -9,22 +9,22 @@ phi = 0 : 2*delta : 2*pi; % azimuth
 [phi,theta] = meshgrid(phi,theta);
 
 % Calculate the harmonic
-Ymn = legendre(degree,cos(theta(:,1)));
-Ymn = Ymn(order+1,:)';
-yy = Ymn;
-for kk = 2: size(theta,1)
-    yy = [yy Ymn];
-end;
-yy = yy.*cos(order*phi);
+Ymn = legendre(degree,cos(theta));
+if degree ~= 0
+    Ymn = squeeze(Ymn(abs(order)+1,:,:));
+end
 
-order = max(max(abs(yy)));
-rho = 5 + 2*yy/order;
+Kmn = sqrt(((2*degree+1)/4*pi)*(factorial((degree - order))/factorial( order + degree )));
 
+i = sqrt(-1);
+
+Yml = Kmn*Ymn.*exp(i*order.*phi);
+
+rho = real(Yml).^2;
+rho2 = imag(Yml).^2;
 % Apply spherical coordinate equations
-r = rho.*sin(theta);
-x = r.*cos(phi);    % spherical coordinate equations
-y = r.*sin(phi);
-z = rho.*cos(theta);
+
+[x,y,z] = sph2cart(phi, theta-pi/2, rho);
 
 % Plot the surface
 clf
@@ -34,3 +34,4 @@ lighting phong
 axis tight equal off
 view(40,30)
 camzoom(1.5)
+

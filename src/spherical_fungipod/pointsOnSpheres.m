@@ -55,7 +55,8 @@ end
 %%}
 
 
-radius = 4*voxeldim;
+%radius = 4*voxeldim;
+radius = radius_of_yeast;
 %{
 radius = 90*voxeldim;
 %}
@@ -70,7 +71,10 @@ locationX_results = [];
 locationY_results = [];
 locationZ_results = [];
 
-for i = 1:no_of_radii
+
+%generate no_of_radiii of concentric spheres and 
+%generate the sampple points on the spheres with make_icosahedron
+for i = 1:no_of_radii    
     [ a, b, c, TRI] = make_icosahedron(2, radius+i*voxeldim, 1, 0, 0);
 %    [ a, b, c, TRI] = make_icosahedron(3, radius+i*voxeldim, 1, 0, 0);
 %    [ a, b, c, TRI] = make_icosahedron(3, radius_of_yeast+i*voxeldim, 1, 0, 0);
