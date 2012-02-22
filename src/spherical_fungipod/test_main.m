@@ -69,33 +69,6 @@ grayscale_with_fung_4 = [];
 % yeast with its fungipods)
 %folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g000'];
 
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g045'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g070'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g080'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g090'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g100'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g110'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g135'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g180'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g225'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g270'];
-%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g315'];
-
-%{
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/1a'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/1b'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/1c'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/1d'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/2a'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/2b'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/2c'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/2d'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/3a'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/3b'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/3c'];
-folder = [folder ; 'C:/Users/cakici/Desktop/small_test_case/3d'];
-%}
-
 %%{
 folder = [folder ; '../data/artifical_images/f1a'];
 folder = [folder ; '../data/artifical_images/f1b'];

@@ -23,10 +23,11 @@ yeastcenter = (yeastcenter_notconverted - 1).*spacing; %x y z of the yeast cente
 
 %img = zeros(512, 512, no_of_img);
 %img = zeros(501, 501, no_of_img);
-img = zeros(150, 150, no_of_img);
+%img = zeros(150, 150, no_of_img);
+img = zeros(61, 61, no_of_img);
 
 %file = strcat(folder, '/Stack00%02d.tif');
-file = strcat(folder, '/stack%04d.tif');
+file = strcat(folder, '/stack%03d.tif');
 
 %{
 for i = 1:no_of_img - 100
@@ -49,7 +50,7 @@ end
 %%{
 for i = 1:no_of_img
     %It = imread(sprintf(file, i-1), 1);
-    It = imread(sprintf(file, i-1), 1);
+    It = imread(sprintf(file, i), 1);
     img(:,:,i) = It;
 end
 %%}
