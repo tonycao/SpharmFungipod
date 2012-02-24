@@ -1,0 +1,525 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>test_main</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-02-22"><meta name="DC.source" content="test_main.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><pre class="codeinput">all_grayscale = [];
+all_regular = [];
+all_invariant = [];
+all_x = [];
+all_y = [];
+all_z = [];
+
+all_TRI = [];
+
+folder = [];
+<span class="comment">%{
+</span><span class="comment">no_of_img = [501 501 501 501 501 501 501 501 501 501 501 501];
+</span><span class="comment">center = [
+</span><span class="comment">250 250 250 1 1;
+</span><span class="comment">250 250 250 2 1;
+</span><span class="comment">250 250 250 3 1;
+</span><span class="comment">250 250 250 4 1;
+</span><span class="comment">250 250 250 5 2;
+</span><span class="comment">250 250 250 6 2;
+</span><span class="comment">250 250 250 7 2;
+</span><span class="comment">250 250 250 8 2;
+</span><span class="comment">250 250 250 9 3;
+</span><span class="comment">250 250 250 10 3;
+</span><span class="comment">250 250 250 11 3;
+</span><span class="comment">250 250 250 12 3;
+</span><span class="comment">];
+</span><span class="comment">%}
+</span>no_of_img = [150 150 150 150 150 150 150 150 150 150 150 150];
+center = [
+75 75 75 1 1;
+75 75 75 2 1;
+75 75 75 3 1;
+75 75 75 4 1;
+75 75 75 5 2;
+75 75 75 6 2;
+75 75 75 7 2;
+75 75 75 8 2;
+75 75 75 9 3;
+75 75 75 10 3;
+75 75 75 11 3;
+75 75 75 12 3;
+];
+
+<span class="comment">%[folder, center, no_of_img] = folders_and_yeast_centers();</span>
+
+invariant_with_fung_0 = [];
+invariant_with_fung_1 = [];
+invariant_with_fung_2 = [];
+invariant_with_fung_3 = [];
+invariant_with_fung_4 = [];
+
+regular_with_fung_0 = [];
+regular_with_fung_1 = [];
+regular_with_fung_2 = [];
+regular_with_fung_3 = [];
+regular_with_fung_4 = [];
+
+grayscale_with_fung_0 = [];
+grayscale_with_fung_1 = [];
+grayscale_with_fung_2 = [];
+grayscale_with_fung_3 = [];
+grayscale_with_fung_4 = [];
+
+
+<span class="comment">%folder = [folder ; 'G:/Users/serdar/Desktop/pseudo/perfectsphere'];</span>
+
+<span class="comment">% each one is a folder that holds 2D stack of images of a yeast-fungipod</span>
+<span class="comment">% complex (i.e. not the whole specimen with many yeasts, but just a single</span>
+<span class="comment">% yeast with its fungipods)</span>
+<span class="comment">%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g000'];</span>
+
+<span class="comment">%%{</span>
+folder = [folder ; <span class="string">'../data/artifical_images/f1a'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f1b'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f1c'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f1d'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f2a'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f2b'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f2c'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f2d'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f3a'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f3b'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f3c'</span>];
+folder = [folder ; <span class="string">'../data/artifical_images/f3d'</span>];
+<span class="comment">%%}</span>
+
+<span class="comment">%{
+</span><span class="comment">for q = 1:size(folder,1)
+</span><span class="comment">    q
+</span><span class="comment">    [temp_x, temp_y, temp_z, temp_grayscale, temp_regular, temp_invariant, temp_TRI] = calculate(folder(q,:));
+</span><span class="comment">    all_grayscale = cat(3,all_grayscale,temp_grayscale);
+</span><span class="comment">    all_regular = cat(3,all_regular,temp_regular);
+</span><span class="comment">    all_invariant = cat(3,all_invariant,temp_invariant);
+</span><span class="comment">
+</span><span class="comment">    all_x = cat(3,all_x,temp_x);
+</span><span class="comment">    all_y = cat(3,all_y,temp_y);
+</span><span class="comment">    all_z = cat(3,all_z,temp_z);
+</span><span class="comment">
+</span><span class="comment">    all_TRI = cat(3,all_TRI,temp_TRI);
+</span><span class="comment">end
+</span><span class="comment">%}
+</span>
+row_no = 1;
+
+<span class="comment">%{
+</span><span class="comment">voxeldim = 0.414;
+</span><span class="comment">spacing = [0.414 0.414 0.200];
+</span><span class="comment">no_of_radii = 5;
+</span><span class="comment">radius_of_yeast = 10*voxeldim;
+</span><span class="comment">%}
+</span><span class="comment">%%{</span>
+voxeldim = 0.414;
+spacing = [0.414 0.414 0.414];
+no_of_radii = 5;
+radius_of_yeast = 10*voxeldim;
+<span class="comment">%%}</span>
+
+<span class="keyword">for</span> q = 1:size(folder,1)
+    q
+
+    check = 1;
+    <span class="keyword">while</span> check == 1
+        <span class="keyword">if</span>(row_no &lt;= size(center,1) &amp;&amp; center(row_no,4) == q)
+
+            [temp_x, temp_y, temp_z, temp_grayscale, temp_regular, temp_invariant, temp_TRI] <span class="keyword">...</span>
+                = calculate(center(row_no,1:3), folder(q,:), voxeldim, no_of_img(q), spacing, no_of_radii, radius_of_yeast);
+
+            <span class="keyword">if</span>(center(row_no,5) == 1)
+                invariant_with_fung_1 = cat(3,invariant_with_fung_1,temp_invariant);
+                regular_with_fung_1 = cat(3,regular_with_fung_1,temp_regular);
+                grayscale_with_fung_1 = cat(3,grayscale_with_fung_1,temp_grayscale);
+            <span class="keyword">elseif</span>(center(row_no,5) == 2)
+                invariant_with_fung_2 = cat(3,invariant_with_fung_2,temp_invariant);
+                regular_with_fung_2 = cat(3,regular_with_fung_2,temp_regular);
+                grayscale_with_fung_2 = cat(3,grayscale_with_fung_2,temp_grayscale);
+            <span class="keyword">elseif</span>(center(row_no,5) == 3)
+                invariant_with_fung_3 = cat(3,invariant_with_fung_3,temp_invariant);
+                regular_with_fung_3 = cat(3,regular_with_fung_3,temp_regular);
+                grayscale_with_fung_3 = cat(3,grayscale_with_fung_3,temp_grayscale);
+            <span class="keyword">elseif</span>(center(row_no,5) == 4)
+                invariant_with_fung_4 = cat(3,invariant_with_fung_4,temp_invariant);
+                regular_with_fung_4 = cat(3,regular_with_fung_4,temp_regular);
+                grayscale_with_fung_4 = cat(3,grayscale_with_fung_4,temp_grayscale);
+            <span class="keyword">else</span>
+
+            <span class="keyword">end</span>
+
+            row_no = row_no + 1;
+
+        <span class="keyword">else</span>
+            check = 0;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+<span class="comment">%%%%%%%%%%%%</span>
+all = cat(3,invariant_with_fung_1,invariant_with_fung_2,invariant_with_fung_3,invariant_with_fung_4);
+<span class="comment">%all = cat(3,invariant_with_fung_1,invariant_with_fung_2,invariant_with_fung_3);</span>
+conf_all = squeeze(all)';
+all_dist= dist2(conf_all,conf_all);
+figure, imagesc(all_dist), colorbar, colormap <span class="string">hot</span>, title <span class="string">''</span>
+<span class="comment">%%%%%%%%%%%%</span>
+
+<span class="comment">%temp_fung = squeeze(all_invariant)';</span>
+<span class="comment">%burdaki ' olayina dikkat. conjugate aliyo gene galiba. disa bi tane "conj"</span>
+<span class="comment">%koyman gerekebilir.</span>
+
+<span class="comment">%with_1_fung = temp_fung(1:4,:);</span>
+<span class="comment">%with_2_fung = temp_fung(5:8,:);</span>
+<span class="comment">%with_3_fung = temp_fung(9:12,:);</span>
+</pre><pre class="codeoutput">
+q =
+
+     1
+
+
+q =
+
+     2
+
+
+q =
+
+     3
+
+
+q =
+
+     4
+
+
+q =
+
+     5
+
+
+q =
+
+     6
+
+
+q =
+
+     7
+
+
+q =
+
+     8
+
+
+q =
+
+     9
+
+
+q =
+
+    10
+
+
+q =
+
+    11
+
+
+q =
+
+    12
+
+</pre><img vspace="5" hspace="5" src="test_main_01.png" alt=""> <pre class="codeinput"><span class="comment">%all_dist= dist2(temp_fung,temp_fung);</span>
+
+trainingSet = conf_all;
+grouplabel = center(:,5);
+
+<span class="comment">% knn test</span>
+sizeTraining = size(trainingSet,1);
+<span class="keyword">for</span> i=1:sizeTraining
+   test = trainingSet(i,:);
+   training = trainingSet;
+   training(i,:) = [];
+   group = grouplabel;
+   group(i,:) = [];
+
+   label = knnclassify(test, training, group);
+
+   display([num2str(i) <span class="string">'th test case labeled as '</span> num2str(label) <span class="string">''</span>]);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">1th test case labeled as 1
+2th test case labeled as 1
+3th test case labeled as 1
+4th test case labeled as 1
+5th test case labeled as 2
+6th test case labeled as 2
+7th test case labeled as 2
+8th test case labeled as 2
+9th test case labeled as 3
+10th test case labeled as 3
+11th test case labeled as 3
+12th test case labeled as 3
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.13<br></p></div><!--
+##### SOURCE BEGIN #####
+all_grayscale = [];
+all_regular = [];
+all_invariant = [];
+all_x = [];
+all_y = [];
+all_z = [];
+
+all_TRI = [];
+
+folder = [];
+%{
+no_of_img = [501 501 501 501 501 501 501 501 501 501 501 501];
+center = [
+250 250 250 1 1;
+250 250 250 2 1;
+250 250 250 3 1;
+250 250 250 4 1;
+250 250 250 5 2;
+250 250 250 6 2;
+250 250 250 7 2;
+250 250 250 8 2;
+250 250 250 9 3;
+250 250 250 10 3;
+250 250 250 11 3;
+250 250 250 12 3;
+];
+%}
+no_of_img = [150 150 150 150 150 150 150 150 150 150 150 150];
+center = [
+75 75 75 1 1;
+75 75 75 2 1;
+75 75 75 3 1;
+75 75 75 4 1;
+75 75 75 5 2;
+75 75 75 6 2;
+75 75 75 7 2;
+75 75 75 8 2;
+75 75 75 9 3;
+75 75 75 10 3;
+75 75 75 11 3;
+75 75 75 12 3;
+];
+
+%[folder, center, no_of_img] = folders_and_yeast_centers();
+
+invariant_with_fung_0 = [];
+invariant_with_fung_1 = [];
+invariant_with_fung_2 = [];
+invariant_with_fung_3 = [];
+invariant_with_fung_4 = [];
+
+regular_with_fung_0 = [];
+regular_with_fung_1 = [];
+regular_with_fung_2 = [];
+regular_with_fung_3 = [];
+regular_with_fung_4 = [];
+
+grayscale_with_fung_0 = [];
+grayscale_with_fung_1 = [];
+grayscale_with_fung_2 = [];
+grayscale_with_fung_3 = [];
+grayscale_with_fung_4 = [];
+
+
+%folder = [folder ; 'G:/Users/serdar/Desktop/pseudo/perfectsphere'];
+
+% each one is a folder that holds 2D stack of images of a yeast-fungipod 
+% complex (i.e. not the whole specimen with many yeasts, but just a single
+% yeast with its fungipods)
+%folder = [folder ; 'C:/Users/cakici/Desktop/test_image_maker/g000'];
+
+%%{
+folder = [folder ; '../data/artifical_images/f1a'];
+folder = [folder ; '../data/artifical_images/f1b'];
+folder = [folder ; '../data/artifical_images/f1c'];
+folder = [folder ; '../data/artifical_images/f1d'];
+folder = [folder ; '../data/artifical_images/f2a'];
+folder = [folder ; '../data/artifical_images/f2b'];
+folder = [folder ; '../data/artifical_images/f2c'];
+folder = [folder ; '../data/artifical_images/f2d'];
+folder = [folder ; '../data/artifical_images/f3a'];
+folder = [folder ; '../data/artifical_images/f3b'];
+folder = [folder ; '../data/artifical_images/f3c'];
+folder = [folder ; '../data/artifical_images/f3d'];
+%%}
+
+%{
+for q = 1:size(folder,1)
+    q
+    [temp_x, temp_y, temp_z, temp_grayscale, temp_regular, temp_invariant, temp_TRI] = calculate(folder(q,:));
+    all_grayscale = cat(3,all_grayscale,temp_grayscale);
+    all_regular = cat(3,all_regular,temp_regular);
+    all_invariant = cat(3,all_invariant,temp_invariant);
+    
+    all_x = cat(3,all_x,temp_x);
+    all_y = cat(3,all_y,temp_y);
+    all_z = cat(3,all_z,temp_z);
+    
+    all_TRI = cat(3,all_TRI,temp_TRI);
+end
+%}
+
+row_no = 1;
+
+%{
+voxeldim = 0.414;
+spacing = [0.414 0.414 0.200];
+no_of_radii = 5;
+radius_of_yeast = 10*voxeldim;
+%}
+%%{
+voxeldim = 0.414;
+spacing = [0.414 0.414 0.414];
+no_of_radii = 5;
+radius_of_yeast = 10*voxeldim;
+%%}
+
+for q = 1:size(folder,1)
+    q
+    
+    check = 1;
+    while check == 1
+        if(row_no <= size(center,1) && center(row_no,4) == q)
+            
+            [temp_x, temp_y, temp_z, temp_grayscale, temp_regular, temp_invariant, temp_TRI] ...
+                = calculate(center(row_no,1:3), folder(q,:), voxeldim, no_of_img(q), spacing, no_of_radii, radius_of_yeast);
+            
+            if(center(row_no,5) == 1)
+                invariant_with_fung_1 = cat(3,invariant_with_fung_1,temp_invariant);
+                regular_with_fung_1 = cat(3,regular_with_fung_1,temp_regular);
+                grayscale_with_fung_1 = cat(3,grayscale_with_fung_1,temp_grayscale);
+            elseif(center(row_no,5) == 2)
+                invariant_with_fung_2 = cat(3,invariant_with_fung_2,temp_invariant);
+                regular_with_fung_2 = cat(3,regular_with_fung_2,temp_regular);
+                grayscale_with_fung_2 = cat(3,grayscale_with_fung_2,temp_grayscale);
+            elseif(center(row_no,5) == 3)
+                invariant_with_fung_3 = cat(3,invariant_with_fung_3,temp_invariant);
+                regular_with_fung_3 = cat(3,regular_with_fung_3,temp_regular);
+                grayscale_with_fung_3 = cat(3,grayscale_with_fung_3,temp_grayscale);
+            elseif(center(row_no,5) == 4)
+                invariant_with_fung_4 = cat(3,invariant_with_fung_4,temp_invariant);
+                regular_with_fung_4 = cat(3,regular_with_fung_4,temp_regular);
+                grayscale_with_fung_4 = cat(3,grayscale_with_fung_4,temp_grayscale);
+            else
+                
+            end
+            
+            row_no = row_no + 1;
+            
+        else
+            check = 0;
+        end
+    end
+    
+end
+
+%%%%%%%%%%%%
+all = cat(3,invariant_with_fung_1,invariant_with_fung_2,invariant_with_fung_3,invariant_with_fung_4);
+%all = cat(3,invariant_with_fung_1,invariant_with_fung_2,invariant_with_fung_3);
+conf_all = squeeze(all)';
+all_dist= dist2(conf_all,conf_all);
+figure, imagesc(all_dist), colorbar, colormap hot, title ''
+%%%%%%%%%%%%
+
+%temp_fung = squeeze(all_invariant)';
+%burdaki ' olayina dikkat. conjugate aliyo gene galiba. disa bi tane "conj"
+%koyman gerekebilir.
+
+%with_1_fung = temp_fung(1:4,:);
+%with_2_fung = temp_fung(5:8,:);
+%with_3_fung = temp_fung(9:12,:);
+
+%%
+%all_dist= dist2(temp_fung,temp_fung);
+
+trainingSet = conf_all;
+grouplabel = center(:,5);
+
+% knn test
+sizeTraining = size(trainingSet,1);
+for i=1:sizeTraining
+   test = trainingSet(i,:);
+   training = trainingSet;
+   training(i,:) = [];
+   group = grouplabel;
+   group(i,:) = [];
+   
+   label = knnclassify(test, training, group);
+   
+   display([num2str(i) 'th test case labeled as ' num2str(label) '']);
+end
+
+
+
+
+##### SOURCE END #####
+--></body></html>

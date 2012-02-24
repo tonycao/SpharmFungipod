@@ -27,6 +27,7 @@ yeastcenter = (yeastcenter_notconverted - 1).*spacing; %x y z of the yeast cente
 img = zeros(61, 61, no_of_img);
 
 %file = strcat(folder, '/Stack00%02d.tif');
+%file = strcat(folder, '/stack%04d.tif');
 file = strcat(folder, '/stack%03d.tif');
 
 %{

@@ -41,7 +41,7 @@ allSphereRegularCoefficients = [];
 %each row consists of the rotation invariant coefficients of a given radius level
 allSphereRotationInvariantCoefficients = [];
 
-max_degree = 4; % i.e. "l" takes values between 0 and 6 (both included).
+max_degree = 5; % i.e. "l" takes values between 0 and 6 (both included).
 %max_degree = 4
 
 basis_count = max_degree+1+(max_degree*(max_degree+1));
@@ -82,7 +82,7 @@ for i = 1:no_of_radii
 %        variant = regularSphericalHarmonicsAtANode(thetaPhysics, phiPhysics);
         revisedspharm = [revisedspharm ; variant];        
     end
-    i
+    %i
 
     
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -99,6 +99,6 @@ for i = 1:no_of_radii
     rotationInvariant = rotationInvariantSpHarmCalc(max_degree, conj(sphereCoefficients')); %added conj to cancel out the automatic conj op by transpose op
 %    allSphereRotationInvariantCoefficients = [allSphereRotationInvariantCoefficients ; rotationInvariant];
     allSphereRotationInvariantCoefficients = [allSphereRotationInvariantCoefficients rotationInvariant];
-    i
+    %i
 end
 %%
